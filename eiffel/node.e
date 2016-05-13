@@ -5,7 +5,7 @@ note
 	revision: "$Revision$"
 
 class
-	NODE[G->LIST]
+	NODE[G->COMPARABLE]
 
 create
 	make
@@ -13,8 +13,8 @@ create
 feature
 	-- variables
 	degree: INTEGER_32
-	entry: G
-	child: G
+	entry: ENTRY[G]
+	child: NODE[G]
 
 
 feature
@@ -38,22 +38,30 @@ feature
 		end
 
 feature
-	getEntry: LIST
+
+	minEntries: BOOLEAN
+		do
+			Result:= current.getEntry.count = degree -1
+		end
+
+feature
+	getEntry: G
 		do
 			Result:= entry
 		end
 
-	setEntry(newEntry: LIST)
+	setEntry(newEntry: ENTRY[G])
 		do
 			entry:= newEntry
 		end
 
-	getChild: LIST
+feature
+	getChild: G
 		do
 			Result:= child
 		end
 
-	setChild(newChild: LIST)
+	setChild(newChild: NODE[G])
 		do
 			child:= newChild
 		end
