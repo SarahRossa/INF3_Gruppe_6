@@ -11,6 +11,7 @@ create
 	make
 
 feature
+ 	--variables
 	root: detachable NODE
 	degree: INTEGER
 	height: INTEGER
@@ -45,7 +46,7 @@ feature
 				oldRoot:= current.getRoot
 				create root.make(degree)
 				root.child.add(oldRoot)
-				splitChild(root, 0, oldRoot)
+				splitChild(root, 0, oldRoot) --parameter current root, index of split node , split node
 				insertNonFull(current.getRoot, key, pointer)
 				height+1
 			end
@@ -79,9 +80,9 @@ feature
 			i:INTEGER
 
 		do
-			i := node.entry
+			i := node.entry --looking for index of key
 
-			if i< node.entry.count AND if node.entry.item(i).key.is_equal then
+			if i< node.entry.count AND if node.entry.item(i).is_equal(key) then
 					--look for key and delete
 			end
 				deleteFromNode(node, key, i)
@@ -100,7 +101,7 @@ feature
 			leftSibling: detachable NODE
 			rightIndex: INTEGER
 			rightSibling: detachable NODE
-			oldEntries
+			
 		do
 			cNode := pNode.child.index_of(i)
 
@@ -140,14 +141,39 @@ feature
 						cNode.entry.insert(0,pNode.entry.item(i))
 						oldEntries := cNode.entry
 						cNode.entry := leftSibling.entry
-						cNode.entry.
+						cNode.entry.add(oldEntries)
+						if NOT leftSibling.isLeaf then
+							oldChildren := cNode.child
+							cNode.child := leftSibling.child
+							cNode.child.add(oldChildren)
+						end
+
+						pNode.child.remove(leftIndex)
+						pNode.entry.remove(i)
+					else
+						cNode.entry.add(pNode.entry(i))
+						cNode.entry.add(rightSibling.entry)
+
+						if NOT rightSibling.isLeaf then
+							cNode.child.add(rightSibling.child)
+						end
+						pNode.child.remove(rightIndex)
+						pNode.entry.remove(i)
 					end
 				end
 
 
 				end
 			end
+			deleteInnerNode(cNode,key)
 		end
+
+feature
+	--splitChild
+
+	splitChild(pNode: detachable NODE, sNodeIndex: INTEGER, sNODE: detachable NODE)
+
+
 
 
 feature

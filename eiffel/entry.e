@@ -1,7 +1,7 @@
 note
 	description: "Summary description for {ENTRY}."
-	author: ""
-	date: "$Date$"
+	author: "Gruppe 6"
+	date: "$13.05.2016$"
 	revision: "$Revision$"
 
 class
@@ -15,12 +15,15 @@ feature
 	equals(other: Entry [G]):BOOLEAN
 
 		do
-			Result:= current.getKey.is_equal(other) 
+			Result:= current.getKey.is_equal(other)
 		end
 
 feature
 	--getter & setter for key and pointer
 
-	getKey:
+	getKey: INTEGER
+	do
+		Result:= key
+ 	end
 
 end

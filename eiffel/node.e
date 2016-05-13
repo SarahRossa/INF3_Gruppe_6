@@ -1,7 +1,7 @@
 note
 	description: "Summary description for {NODE}."
-	author: ""
-	date: "$Date$"
+	author: "Gruppe 6"
+	date: "$13.05.2016$"
 	revision: "$Revision$"
 
 class
@@ -12,13 +12,13 @@ create
 
 feature
 	-- variables
-	degree: INTEGER_32
+	degree: INTEGER
 	entry: ENTRY[G]
 	child: NODE[G]
 
 
 feature
-	make (degree: INTEGER_32)
+	make (degree: INTEGER)
 		do
 			create node.make (degree)
 		end
