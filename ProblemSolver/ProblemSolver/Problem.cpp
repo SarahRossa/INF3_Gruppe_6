@@ -26,12 +26,12 @@ public:
 		do
 		{
 			checkSolvability();
-			if (directlySolvable == true)
+			if (directlySolvable)
 			{
-				stop = true;
+				stop = true ;
 			}
 			part();
-			} while (stop = true);
+			} while (!stop);
 	}
 	
 
