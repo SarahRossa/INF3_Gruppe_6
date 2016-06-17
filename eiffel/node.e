@@ -1,24 +1,24 @@
 note
 	description: "Summary description for {NODE}."
-	author: ""
-	date: "$Date$"
+	author: "Gruppe 6"
+	date: "$13.05.2016$"
 	revision: "$Revision$"
 
 class
-	NODE[G->LIST]
+	NODE[G->COMPARABLE]
 
 create
 	make
 
 feature
 	-- variables
-	degree: INTEGER_32
-	entry: G
-	child: G
+	degree: INTEGER
+	entry: ENTRY[G]
+	child: NODE[G]
 
 
 feature
-	make (degree: INTEGER_32)
+	make (degree: INTEGER)
 		do
 			create node.make (degree)
 		end
@@ -38,22 +38,30 @@ feature
 		end
 
 feature
-	getEntry: LIST
+
+	minEntries: BOOLEAN
+		do
+			Result:= current.getEntry.count = degree -1
+		end
+
+feature
+	getEntry: G
 		do
 			Result:= entry
 		end
 
-	setEntry(newEntry: LIST)
+	setEntry(newEntry: ENTRY[G])
 		do
 			entry:= newEntry
 		end
 
-	getChild: LIST
+feature
+	getChild: G
 		do
 			Result:= child
 		end
 
-	setChild(newChild: LIST)
+	setChild(newChild: NODE[G])
 		do
 			child:= newChild
 		end
