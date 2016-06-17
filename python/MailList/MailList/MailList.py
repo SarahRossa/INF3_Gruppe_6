@@ -3,7 +3,7 @@ Date: 12.06.2016
 @author: group 6
 '''
 
-import glob#importblock
+import glob
 import threading
 
 #global variables
@@ -21,7 +21,7 @@ def reader():
         else:
             file = 'mails2.txt'
     
-    emailFile = glob.glob(file) #mit glob können Platzhalter für Dateinamen verwendet werden
+    emailFile = glob.glob(file) #placeholder
     for fileName in sorted(emailFile):
         with open(fileName) as f:
             for line in f:
