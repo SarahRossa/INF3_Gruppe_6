@@ -13,7 +13,7 @@
     <Name>ConsumerProducer</Name>
     <RootNamespace>ConsumerProducer</RootNamespace>
     <LaunchProvider>IronPython (.NET) launcher</LaunchProvider>
-    <CommandLineArguments>5 1 1</CommandLineArguments>
+    <CommandLineArguments>5 2 3</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
     <InterpreterPath>C:/Python34/Python.exe</InterpreterPath>
     <InterpreterId>{d8875a7e-acac-4ee0-bd10-15fb29c426db}</InterpreterId>

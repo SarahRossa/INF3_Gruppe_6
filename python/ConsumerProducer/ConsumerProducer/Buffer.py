@@ -3,7 +3,6 @@ Created on: 03.06.16
 @author: Group 6
 '''
 
-from Lock import mutex
 
 class Buffer():
     list = [None] * 1
@@ -25,12 +24,13 @@ class Buffer():
     
     #Returns oldest element in buffer :FIFO
     def pop(self):
+        tmp = None
         for index, elem in enumerate(self.list):
             if elem != None:
                     tmp = self.list[index]
                     self.delElement()
-                    return tmp
-            return None
+        return tmp
+            
     
     #Moves every element one position up
     def delElement(self):

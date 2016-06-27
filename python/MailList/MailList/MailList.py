@@ -21,7 +21,7 @@ def reader():
         else:
             file = 'mails2.txt'
     
-    emailFile = glob.glob(file) #mit glob können Platzhalter für Dateinamen verwendet werden
+    emailFile = glob.glob(file) #placeholder
     for fileName in sorted(emailFile):
         with open(fileName) as f:
             for line in f:
