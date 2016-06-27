@@ -3,7 +3,7 @@ Date: 12.06.2016
 @author: group 6
 '''
 
-import glob#importblock
+import glob
 import threading
 
 #global variables
