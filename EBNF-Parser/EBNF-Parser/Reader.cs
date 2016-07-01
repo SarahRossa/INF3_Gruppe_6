@@ -1,4 +1,6 @@
-﻿using System;
+﻿///Created on 24.06.2016
+///@author: Group 6
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,6 +21,8 @@ namespace EBNF_Parser
             sr = new StreamReader(s);
         }
 
+
+        // The methods reads and write the text of the open docoment 
         public void parseDocument(Object stateInfo)
         {
             string s = "";
@@ -41,26 +45,8 @@ namespace EBNF_Parser
             }
         }
 
-        static string getLine()
-        {
-            string res = null;
-            string s;
-            if (!isClosed)
-            {
-                if ((s = sr.ReadLine()) != null)
-                {
-                    res = s;
-                }
-                else
-                {
-                    sr.Close();
-                    isClosed = true;
-                    done = true;
-                }
-            }
 
-            return res;
-        }
+
+
     }
-
 }

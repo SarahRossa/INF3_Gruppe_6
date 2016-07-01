@@ -1,21 +1,44 @@
-﻿///Created on 24.06.2016
-///@author: Group 6
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace EBNF_Parser
 {
-    public class Parser
+    class Parser
     {
+        private bool result;
+        private String expr;
+        private ManualResetEvent doneEvent;
+
+        public bool getResult { get { return result; } }
+        public String getText { get { return expr; } }
+
+        // Constructor of Parser
+        // Parameters are the Expression to parse
+        public Parser(String inputExpr, ManualResetEvent inputdoneEvent)
+        {
+            expr = inputExpr;
+            doneEvent = inputdoneEvent;
+
+        }
+        // Method of the threadpool which parses the expression and gives a signal that it's done 
+        public void ThreadPoolCallback(Object threadContext)
+        {
+            int threadIndex = (int)threadContext;
+            Console.WriteLine("thread {0} started...", threadIndex);
+            result = parse(expr);
+            Console.WriteLine("thread {0} result calculated...", threadIndex);
+            doneEvent.Set();
+        }
 
         // Checks if the expression has clamps and  proves them. If their right, then it makes substrings. if not it parses the expression directly
         // The methods returns the result of the expression
-        public bool parse(String input)
+        private bool parse(String input)
         {
             bool result = true;
             int counterLeft = 0;
@@ -57,7 +80,6 @@ namespace EBNF_Parser
                             {
                                 input = input.Substring(0, left - 1) + "1" + input.Substring(right + 1);
                                 result = parse(input);
-
                             }
                             else
                             {
@@ -87,7 +109,7 @@ namespace EBNF_Parser
             bool exp = false;
             if (expression == null)
             {
-                throw new System.ArgumentException("There is no input, give me input");
+                throw new System.ArgumentException("There is no input, give me imput");
             }
             else
             {
@@ -175,7 +197,7 @@ namespace EBNF_Parser
             return result;
         }
 
-        // This method checks if the input is an 'x','X','y','Y','z','Z'
+        // This method checks if the input is an 'x','X','y','Y' 
         // This returns the boolean result
         private bool parseVariable(String variable)
         {
@@ -193,16 +215,22 @@ namespace EBNF_Parser
         private bool parseConstant(String constant)
         {
             bool exp = false;
-           
-            foreach (char digit in constant)
+            StringReader reader = new StringReader(constant);
+            while (reader.Peek() != -1)
             {
+                var digit = (char)reader.Read();
                 if (isDigit(digit))
                 {
                     exp = true;
                 }
-            }
+                else
+                {
+                    exp = false;
+                    break;
+                }
 
-           
+            }
+            reader.Close();
             return exp;
         }
 
