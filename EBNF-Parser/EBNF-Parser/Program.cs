@@ -1,4 +1,6 @@
-﻿using System;
+﻿///Created on 24.06.2016
+///@author: Group 6
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
 
-///Created on 24.06.2016
-///@author: Group 6
+
 namespace EBNF_Parser
 {
     class Program
